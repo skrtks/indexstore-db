@@ -101,6 +101,10 @@ public:
   ///
   ///  \returns `false` if the receiver returned `false` to stop receiving symbols, `true` otherwise.
   bool foreachUnitTestSymbol(function_ref<bool(SymbolOccurrenceRef Occur)> receiver);
+  bool foreachOccurrenceInFilePath(IndexStoreDB::CanonicalFilePathRef FilePath,
+                                   SymbolRoleSet RoleSet,
+                                   function_ref<bool(SymbolOccurrenceRef Occur)> Receiver);
+
 private:
   void *Impl; // A SymbolIndexImpl.
 };

@@ -5,7 +5,7 @@ if(CMAKE_VERSION VERSION_LESS 3.16)
   endif()
 endif()
 
-add_library(IndexStoreDB
+add_library(SwiftIndexStoreDB
   IndexDelegate.swift
   IndexStoreDB.swift
   IndexStoreDBError.swift
@@ -14,18 +14,18 @@ add_library(IndexStoreDB
   SymbolProperty.swift
   SymbolRole.swift
   Symbol.swift)
-set_target_properties(IndexStoreDB PROPERTIES
+set_target_properties(SwiftIndexStoreDB PROPERTIES
   Swift_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/swift
   INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/swift")
-target_link_libraries(IndexStoreDB PRIVATE
+target_link_libraries(SwiftIndexStoreDB PRIVATE
   CIndexStoreDB)
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Darwin)
-  target_link_libraries(IndexStoreDB PRIVATE
+  target_link_libraries(SwiftIndexStoreDB PRIVATE
     Foundation)
 endif()
 
 get_swift_host_arch(swift_arch)
-install(TARGETS IndexStoreDB
+install(TARGETS SwiftIndexStoreDB
   ARCHIVE DESTINATION lib/swift$<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:_static>/$<LOWER_CASE:${CMAKE_SYSTEM_NAME}>
   LIBRARY DESTINATION lib/swift$<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:_static>/$<LOWER_CASE:${CMAKE_SYSTEM_NAME}>
   RUNTIME DESTINATION bin)
@@ -33,4 +33,4 @@ install(FILES
   ${CMAKE_BINARY_DIR}/swift/IndexStoreDB.swiftdoc
   ${CMAKE_BINARY_DIR}/swift/IndexStoreDB.swiftmodule
   DESTINATION lib/swift$<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:_static>/$<LOWER_CASE:${CMAKE_SYSTEM_NAME}>/${swift_arch})
-set_property(GLOBAL APPEND PROPERTY IndexStoreDB_EXPORTS IndexStoreDB)
+set_property(GLOBAL APPEND PROPERTY IndexStoreDB_EXPORTS SwiftIndexStoreDB)

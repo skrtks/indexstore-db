@@ -420,6 +420,15 @@ public final class IndexStoreDB {
     return result
   }
 
+  public func occurrences(inFilePath path: String, roles: SymbolRole) -> [SymbolOccurrence] {
+    var result: [SymbolOccurrence] = []
+    forEachOccurrence(inFilePath: path, roles: roles) { occ in
+      result.append(occ)
+      return true
+    }
+    return result
+  }
+
   @discardableResult
   func forEachSymbol(inFilePath filePath: String, body: @escaping (Symbol) -> Bool) -> Bool {
     return indexstoredb_index_symbols_contained_in_file_path(impl, filePath) { symbol in
@@ -447,6 +456,13 @@ public final class IndexStoreDB {
       return true
     }
     return result
+  }
+
+  @discardableResult
+  func forEachOccurrence(inFilePath filePath: String, roles: SymbolRole, body: @escaping (SymbolOccurrence) -> Bool) -> Bool {
+    return indexstoredb_index_occurrences_contained_in_file_path(impl, filePath, roles.rawValue) { occ in
+      return body(SymbolOccurrence(occ))
+    }
   }
 }
 

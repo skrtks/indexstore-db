@@ -59,6 +59,9 @@ public:
   virtual bool foreachUnitTestSymbolOccurrence(
                         function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) = 0;
 
+  virtual bool foreachSymbolOccurrence(SymbolRoleSet RoleSet,
+                                       function_ref<bool(SymbolOccurrenceRef)> Receiver) = 0;
+
 private:
   virtual void anchor();
 };

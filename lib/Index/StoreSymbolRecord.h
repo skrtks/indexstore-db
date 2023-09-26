@@ -86,6 +86,8 @@ public:
   virtual bool foreachUnitTestSymbolOccurrence(
                function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) override;
 
+  virtual bool foreachSymbolOccurrence(SymbolRoleSet RoleSet,
+                                       function_ref<bool(SymbolOccurrenceRef)> Receiver) override;
 };
 
 } // namespace index

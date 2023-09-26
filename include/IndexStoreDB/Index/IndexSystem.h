@@ -177,6 +177,9 @@ public:
   ///  \returns `false` if the receiver returned `false` to stop receiving symbols, `true` otherwise.
   bool foreachUnitTestSymbol(function_ref<bool(SymbolOccurrenceRef Occur)> receiver);
 
+  bool foreachOccurrenceInFilePath(StringRef FilePath, SymbolRoleSet RoleSet,
+                                   function_ref<bool(SymbolOccurrenceRef Occur)> Receiver);
+
 private:
   IndexSystem(void *Impl) : Impl(Impl) {}
 

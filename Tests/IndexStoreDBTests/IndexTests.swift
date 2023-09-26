@@ -599,6 +599,42 @@ final class IndexTests: XCTestCase {
     testSymbolsInFilePath(with: inputs, usingIndex: ws.index)
   }
 
+  func testReferencesInFileSwift() throws {
+    guard let ws = try staticTibsTestWorkspace(name: "SwiftModules") else { return }
+    try ws.buildAndIndex()
+
+    let inputs = [
+      (
+        path: ws.testLoc("bbb:def").url.path,
+        expectedOccurNames: ["A", "aaa()"]
+      ),
+      (
+        path: ws.testLoc("ccc:def").url.path,
+        expectedOccurNames: ["A", "B", "aaa()", "bbb()"]
+      ),
+    ]
+
+    testOccurrencesInFilePath(with: inputs, usingIndex: ws.index, withRoles: .reference)
+  }
+
+  func testCallsInFileSwift() throws {
+    guard let ws = try staticTibsTestWorkspace(name: "SwiftModules") else { return }
+    try ws.buildAndIndex()
+
+    let inputs = [
+      (
+        path: ws.testLoc("bbb:def").url.path,
+        expectedOccurNames: ["aaa()"]
+      ),
+      (
+        path: ws.testLoc("ccc:def").url.path,
+        expectedOccurNames: ["aaa()", "bbb()"]
+      ),
+    ]
+
+    testOccurrencesInFilePath(with: inputs, usingIndex: ws.index, withRoles: .call)
+  }
+
   func testSymbolsInFileSwift() throws {
     guard let ws = try staticTibsTestWorkspace(name: "SwiftModules") else { return }
     try ws.buildAndIndex()
@@ -625,6 +661,15 @@ final class IndexTests: XCTestCase {
     for (path, expectedSymbolNames) in inputs {
       let actualSymbolNames = subject.symbols(inFilePath: path).map(\.name)
       XCTAssertEqual(actualSymbolNames.sorted(), expectedSymbolNames.sorted())
+    }
+  }
+
+  func testOccurrencesInFilePath(with inputs: [(path: String, expectedOccurNames: [String])],
+                                 usingIndex subject: IndexStoreDB,
+                                 withRoles roles: SymbolRole) {
+    for (path, expectedOccurNames) in inputs {
+      let actualOccurNames = subject.occurrences(inFilePath: path, roles: roles).map(\.symbol.name)
+      XCTAssertEqual(actualOccurNames.sorted(), expectedOccurNames.sorted())
     }
   }
 

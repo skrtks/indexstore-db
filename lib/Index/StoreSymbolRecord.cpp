@@ -354,6 +354,20 @@ bool StoreSymbolRecord::foreachSymbolOccurrenceByUSR(ArrayRef<db::IDCode> USRs,
   return !Err && Finished;
 }
 
+bool StoreSymbolRecord::foreachSymbolOccurrence(SymbolRoleSet RoleSet,
+                                                function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) {
+  assert(RoleSet && "did not set any role!");
+
+  bool Finished = true;
+  bool Err = doForData([&](IndexRecordReader &Reader) {
+    CheckIndexStoreRolesPredicate Pred(RoleSet);
+    PredOccurrenceConverter Converter(*this, Pred, Receiver);
+    Finished = Reader.foreachOccurrence(None, None, Converter);
+  });
+
+  return !Err && Finished;
+}
+
 bool StoreSymbolRecord::foreachRelatedSymbolOccurrenceByUSR(ArrayRef<db::IDCode> USRs,
                                                      SymbolRoleSet RoleSet,
                        function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) {

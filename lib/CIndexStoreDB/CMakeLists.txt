@@ -16,3 +16,11 @@ endif()
 if(NOT BUILD_SHARED_LIBS)
   set_property(GLOBAL APPEND PROPERTY IndexStoreDB_EXPORTS CIndexStoreDB)
 endif()
+
+add_library(IndexStoreDB SHARED CIndexStoreDB.cpp)
+target_compile_options(IndexStoreDB PRIVATE -fblocks)
+target_link_libraries(IndexStoreDB
+        ${CORESERVICES_FRAMEWORK}
+        ${FOUNDATION_FRAMEWORK}
+        Index
+)

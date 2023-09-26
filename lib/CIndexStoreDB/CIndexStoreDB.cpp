@@ -310,8 +310,19 @@ indexstoredb_index_symbols_contained_in_file_path(_Nonnull indexstoredb_index_t 
                                                    _Nonnull indexstoredb_symbol_receiver_t receiver) {
   auto obj = (Object<std::shared_ptr<IndexSystem>> *)index;
   return obj->value->foreachSymbolInFilePath(path, [&](SymbolRef Symbol) -> bool {
-    return receiver((indexstoredb_symbol_receiver_t)Symbol.get());
+    return receiver((indexstoredb_symbol_t)Symbol.get());
   });
+}
+
+bool
+indexstoredb_index_occurrences_contained_in_file_path(_Nonnull indexstoredb_index_t index, const char *_Nonnull path,
+                                                      uint64_t roles,
+                                                      _Nonnull indexstoredb_symbol_occurrence_receiver_t receiver) {
+  auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
+  return obj->value->foreachOccurrenceInFilePath(path, (SymbolRoleSet) roles,
+                                                 [&](SymbolOccurrenceRef Occur) -> bool {
+                                                   return receiver((indexstoredb_symbol_occurrence_t)Occur.get());
+                                                 });
 }
 
 const char *

@@ -234,6 +234,9 @@ public:
   ///
   ///  \returns `false` if the receiver returned `false` to stop receiving symbols, `true` otherwise.
   bool foreachUnitTestSymbol(function_ref<bool(SymbolOccurrenceRef Occur)> receiver);
+
+  bool foreachOccurrenceInFilePath(StringRef FilePath, SymbolRoleSet RoleSet,
+                                   function_ref<bool(SymbolOccurrenceRef Occur)> Receiver);
 };
 
 } // anonymous namespace
@@ -574,6 +577,12 @@ bool IndexSystemImpl::foreachSymbolInFilePath(StringRef filePath,
     return SymIndex->foreachSymbolInFilePath(canonPath, std::move(receiver));
 }
 
+bool IndexSystemImpl::foreachOccurrenceInFilePath(StringRef FilePath, SymbolRoleSet RoleSet,
+                                                  function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) {
+    auto canonPath = PathIndex->getCanonicalPath(FilePath);
+    return SymIndex->foreachOccurrenceInFilePath(canonPath, RoleSet, std::move(Receiver));
+}
+
 bool IndexSystemImpl::foreachFileOfUnit(StringRef unitName,
                                         bool followDependencies,
                                         function_ref<bool(CanonicalFilePathRef filePath)> receiver) {
@@ -766,6 +775,11 @@ bool IndexSystem::foreachCanonicalSymbolOccurrenceByKind(SymbolKind symKind, boo
 bool IndexSystem::foreachSymbolInFilePath(StringRef FilePath,
                                           function_ref<bool(SymbolRef Symbol)> Receiver) {
     return IMPL->foreachSymbolInFilePath(FilePath, std::move(Receiver));
+}
+
+bool IndexSystem::foreachOccurrenceInFilePath(StringRef FilePath, SymbolRoleSet RoleSet,
+                                              function_ref<bool(SymbolOccurrenceRef Occ)> Receiver) {
+    return IMPL->foreachOccurrenceInFilePath(FilePath, RoleSet, std::move(Receiver));
 }
 
 bool IndexSystem::isKnownFile(StringRef filePath) {

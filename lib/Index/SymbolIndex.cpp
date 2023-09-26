@@ -76,6 +76,9 @@ public:
   bool foreachSymbolInFilePath(CanonicalFilePathRef filePath,
                                function_ref<bool(SymbolRef Symbol)> Receiver);
 
+  bool foreachOccurrenceInFilePath(CanonicalFilePathRef FilePath, SymbolRoleSet RoleSet,
+                                   function_ref<bool(SymbolOccurrenceRef Occurrence)> Receiver);
+
   bool foreachSymbolName(function_ref<bool(StringRef name)> receiver);
 
   bool foreachCanonicalSymbolOccurrenceByUSR(StringRef USR,
@@ -495,6 +498,33 @@ bool SymbolIndexImpl::foreachSymbolInFilePath(CanonicalFilePathRef filePath,
     return didFinish;
 }
 
+bool SymbolIndexImpl::foreachOccurrenceInFilePath(CanonicalFilePathRef FilePath, SymbolRoleSet RoleSet,
+                                                  function_ref<bool(SymbolOccurrenceRef Occurrence)> Receiver) {
+  bool didFinish = true;
+  ReadTransaction reader(DBase);
+
+  IDCode filePathCode = reader.getFilePathCode(FilePath);
+  reader.foreachUnitContainingFile(filePathCode, [&](ArrayRef<IDCode> idCodes) -> bool {
+      for (IDCode idCode: idCodes) {
+        UnitInfo unitInfo = reader.getUnitInfo(idCode);
+
+        for (UnitInfo::Provider provider: unitInfo.ProviderDepends) {
+          IDCode providerCode = provider.ProviderCode;
+          if (provider.FileCode == filePathCode) {
+            auto record = createVisibleProviderForCode(providerCode, reader);
+            didFinish = record->foreachSymbolOccurrence(RoleSet, Receiver);
+
+            return false;
+          }
+        }
+      }
+
+      return true;
+  });
+
+  return didFinish;
+}
+
 bool SymbolIndexImpl::foreachCanonicalSymbolOccurrenceByKind(SymbolKind symKind, bool workspaceOnly,
                                                              function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) {
   return foreachCanonicalSymbolOccurrenceImpl(workspaceOnly,
@@ -679,6 +709,11 @@ bool SymbolIndex::foreachCanonicalSymbolOccurrenceByKind(SymbolKind symKind, boo
 bool SymbolIndex::foreachSymbolInFilePath(CanonicalFilePathRef filePath,
                                           function_ref<bool(SymbolRef Occur)> Receiver) {
   return IMPL->foreachSymbolInFilePath(filePath, std::move(Receiver));
+}
+
+bool SymbolIndex::foreachOccurrenceInFilePath(CanonicalFilePathRef FilePath, SymbolRoleSet RoleSet,
+                                              function_ref<bool(SymbolOccurrenceRef Occur)> Receiver) {
+  return IMPL->foreachOccurrenceInFilePath(FilePath, RoleSet, std::move(Receiver));
 }
 
 bool SymbolIndex::foreachUnitTestSymbolReferencedByOutputPaths(ArrayRef<CanonicalFilePathRef> FilePaths,
