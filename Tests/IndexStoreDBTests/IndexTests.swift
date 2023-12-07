@@ -468,6 +468,45 @@ final class IndexTests: XCTestCase {
     XCTAssertNil(delegate.outOfDateInfo)
   }
 
+  func testUnitProcessedEvent() throws {
+    class Delegate: IndexDelegate {
+      let queue: DispatchQueue = DispatchQueue(label: "testDelegate mutex")
+      private var _unitInfos: [StoreUnitInfo] = []
+      var unitInfos: [StoreUnitInfo] {
+        queue.sync {
+          _unitInfos
+        }
+      }
+
+      func reset() {
+        queue.sync {
+          _unitInfos.removeAll()
+        }
+      }
+
+      func processingAddedPending(_ count: Int) {}
+
+      func processingCompleted(_ count: Int) {}
+
+      func processedStoreUnit(unitInfo: StoreUnitInfo) {
+        queue.sync {
+          _unitInfos.append(unitInfo)
+        }
+      }
+    }
+
+    guard let ws = try mutableTibsTestWorkspace(name: "SwiftModules") else { return }
+
+    let delegate = Delegate()
+    ws.delegate = delegate
+
+    try ws.buildAndIndex()
+
+    ws.index.pollForUnitChangesAndWait()
+
+    XCTAssertEqual(delegate.unitInfos.count, 6)
+  }
+
   func testMainFilesContainingFile() throws {
     guard let ws = try staticTibsTestWorkspace(name: "MainFiles") else { return }
     try ws.buildAndIndex()

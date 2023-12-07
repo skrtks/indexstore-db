@@ -58,7 +58,7 @@ public:
 struct DelegateEvent {
   indexstoredb_delegate_event_kind_t kind;
   uint64_t count;
-  StoreUnitInfo *outOfDateUnitInfo = nullptr;
+  StoreUnitInfo *unitInfo = nullptr;
   uint64_t outOfDateModTime = 0;
   std::string outOfDateTriggerFile;
   std::string outOfDateTriggerDescription;
@@ -92,6 +92,11 @@ public:
         trigger->getPath(),
         trigger->description(),
         synchronous};
+    callback(&event);
+  }
+
+  void processedStoreUnit(StoreUnitInfo unitInfo) override {
+    DelegateEvent event{INDEXSTOREDB_EVENT_UNIT_PROCESSED, 0, &unitInfo};
     callback(&event);
   }
 };
@@ -246,8 +251,8 @@ uint64_t indexstoredb_delegate_event_get_count(indexstoredb_delegate_event_t eve
 }
 
 indexstoredb_unit_info_t
-indexstoredb_delegate_event_get_outofdate_unit_info(indexstoredb_delegate_event_t event) {
-  return reinterpret_cast<DelegateEvent *>(event)->outOfDateUnitInfo;
+indexstoredb_delegate_event_get_unit_info(indexstoredb_delegate_event_t event) {
+  return reinterpret_cast<DelegateEvent *>(event)->unitInfo;
 }
 
 uint64_t indexstoredb_delegate_event_get_outofdate_modtime(indexstoredb_delegate_event_t event) {
@@ -261,7 +266,7 @@ bool indexstoredb_delegate_event_get_outofdate_is_synchronous(indexstoredb_deleg
 const char *
 indexstoredb_delegate_event_get_outofdate_trigger_original_file(indexstoredb_delegate_event_t event) {
   DelegateEvent *evt = reinterpret_cast<DelegateEvent *>(event);
-  if (evt->outOfDateUnitInfo)
+  if (evt->kind == INDEXSTOREDB_EVENT_UNIT_OUT_OF_DATE && evt->unitInfo)
     return evt->outOfDateTriggerFile.c_str();
   else
     return nullptr;
@@ -270,7 +275,7 @@ indexstoredb_delegate_event_get_outofdate_trigger_original_file(indexstoredb_del
 const char *
 indexstoredb_delegate_event_get_outofdate_trigger_description(indexstoredb_delegate_event_t event) {
   DelegateEvent *evt = reinterpret_cast<DelegateEvent *>(event);
-  if (evt->outOfDateUnitInfo)
+  if (evt->kind == INDEXSTOREDB_EVENT_UNIT_OUT_OF_DATE && evt->unitInfo)
     return evt->outOfDateTriggerDescription.c_str();
   else
     return nullptr;

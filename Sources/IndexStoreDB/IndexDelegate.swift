@@ -39,6 +39,8 @@ public protocol IndexDelegate: AnyObject {
     triggerHintDescription: String,
     synchronous: Bool
   )
+
+  func processedStoreUnit(unitInfo: StoreUnitInfo)
 }
 
 extension IndexDelegate {
@@ -50,6 +52,8 @@ extension IndexDelegate {
     synchronous: Bool
   ) {
   }
+
+  public func processedStoreUnit(unitInfo: StoreUnitInfo) {}
 }
 
 extension IndexDelegate {
@@ -63,7 +67,7 @@ extension IndexDelegate {
       let count = indexstoredb_delegate_event_get_count(event)
       self.processingCompleted(Int(count))
     case INDEXSTOREDB_EVENT_UNIT_OUT_OF_DATE:
-      let c_unitInfo = indexstoredb_delegate_event_get_outofdate_unit_info(event)!
+      let c_unitInfo = indexstoredb_delegate_event_get_unit_info(event)!
       let unitInfo = StoreUnitInfo(
         mainFilePath: String(cString: indexstoredb_unit_info_main_file_path(c_unitInfo)),
         unitName: String(cString: indexstoredb_unit_info_unit_name(c_unitInfo))
@@ -75,6 +79,13 @@ extension IndexDelegate {
         triggerHintDescription: String(cString: indexstoredb_delegate_event_get_outofdate_trigger_description(event)!),
         synchronous: indexstoredb_delegate_event_get_outofdate_is_synchronous(event)
       )
+    case INDEXSTOREDB_EVENT_UNIT_PROCESSED:
+      let c_unitInfo = indexstoredb_delegate_event_get_unit_info(event)!
+      let unitInfo = StoreUnitInfo(
+        mainFilePath: String(cString: indexstoredb_unit_info_main_file_path(c_unitInfo)),
+        unitName: String(cString: indexstoredb_unit_info_unit_name(c_unitInfo))
+      )
+      self.processedStoreUnit(unitInfo: unitInfo)
     default:
       return
     }

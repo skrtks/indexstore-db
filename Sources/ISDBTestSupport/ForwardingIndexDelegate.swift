@@ -46,4 +46,8 @@ final class ForwardingIndexDelegate: IndexDelegate {
       synchronous: synchronous
     )
   }
+
+  func processedStoreUnit(unitInfo: StoreUnitInfo) {
+    delegate?.processedStoreUnit(unitInfo: unitInfo)
+  }
 }
