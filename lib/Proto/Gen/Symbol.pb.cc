@@ -106,6 +106,22 @@ struct SymbolOccurrenceDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SymbolOccurrenceDefaultTypeInternal _SymbolOccurrence_default_instance_;
+PROTOBUF_CONSTEXPR LightOccurrence::LightOccurrence(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.usr_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.line_)*/0u
+  , /*decltype(_impl_.column_)*/0u} {}
+struct LightOccurrenceDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR LightOccurrenceDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~LightOccurrenceDefaultTypeInternal() {}
+  union {
+    LightOccurrence _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LightOccurrenceDefaultTypeInternal _LightOccurrence_default_instance_;
 PROTOBUF_CONSTEXPR SymbolOccurrences::SymbolOccurrences(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.occurrence_)*/{}
@@ -119,6 +135,19 @@ struct SymbolOccurrencesDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SymbolOccurrencesDefaultTypeInternal _SymbolOccurrences_default_instance_;
+PROTOBUF_CONSTEXPR LightOccurrences::LightOccurrences(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.light_occurrence_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct LightOccurrencesDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR LightOccurrencesDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~LightOccurrencesDefaultTypeInternal() {}
+  union {
+    LightOccurrences _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LightOccurrencesDefaultTypeInternal _LightOccurrences_default_instance_;
 PROTOBUF_CONSTEXPR Symbols::Symbols(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.symbol_)*/{}
@@ -133,7 +162,7 @@ struct SymbolsDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SymbolsDefaultTypeInternal _Symbols_default_instance_;
 }  // namespace ProtoIndexStoreDB
-static ::_pb::Metadata file_level_metadata_Symbol_2eproto[7];
+static ::_pb::Metadata file_level_metadata_Symbol_2eproto[9];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Symbol_2eproto[4];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Symbol_2eproto = nullptr;
 
@@ -208,6 +237,18 @@ const uint32_t TableStruct_Symbol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   4,
   0,
   ~0u,
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrence, _impl_._has_bits_),
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrence, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrence, _impl_.usr_),
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrence, _impl_.line_),
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrence, _impl_.column_),
+  0,
+  1,
+  2,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::SymbolOccurrences, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -215,6 +256,13 @@ const uint32_t TableStruct_Symbol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::SymbolOccurrences, _impl_.occurrence_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrences, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::LightOccurrences, _impl_.light_occurrence_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::ProtoIndexStoreDB::Symbols, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -229,8 +277,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 26, 34, -1, sizeof(::ProtoIndexStoreDB::SymbolRelation)},
   { 36, 47, -1, sizeof(::ProtoIndexStoreDB::SymbolOccurrenceLocation)},
   { 52, 64, -1, sizeof(::ProtoIndexStoreDB::SymbolOccurrence)},
-  { 70, -1, -1, sizeof(::ProtoIndexStoreDB::SymbolOccurrences)},
-  { 77, -1, -1, sizeof(::ProtoIndexStoreDB::Symbols)},
+  { 70, 79, -1, sizeof(::ProtoIndexStoreDB::LightOccurrence)},
+  { 82, -1, -1, sizeof(::ProtoIndexStoreDB::SymbolOccurrences)},
+  { 89, -1, -1, sizeof(::ProtoIndexStoreDB::LightOccurrences)},
+  { 96, -1, -1, sizeof(::ProtoIndexStoreDB::Symbols)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -239,7 +289,9 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::ProtoIndexStoreDB::_SymbolRelation_default_instance_._instance,
   &::ProtoIndexStoreDB::_SymbolOccurrenceLocation_default_instance_._instance,
   &::ProtoIndexStoreDB::_SymbolOccurrence_default_instance_._instance,
+  &::ProtoIndexStoreDB::_LightOccurrence_default_instance_._instance,
   &::ProtoIndexStoreDB::_SymbolOccurrences_default_instance_._instance,
+  &::ProtoIndexStoreDB::_LightOccurrences_default_instance_._instance,
   &::ProtoIndexStoreDB::_Symbols_default_instance_._instance,
 };
 
@@ -290,17 +342,21 @@ const char descriptor_table_protodef_Symbol_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "Occurrence.ProviderKind\022\016\n\006target\030\005 \001(\t\022"
   "4\n\trelations\030\006 \003(\0132!.ProtoIndexStoreDB.S"
   "ymbolRelation\"$\n\014ProviderKind\022\t\n\005CLANG\020\001"
-  "\022\t\n\005SWIFT\020\002\"L\n\021SymbolOccurrences\0227\n\noccu"
-  "rrence\030\001 \003(\0132#.ProtoIndexStoreDB.SymbolO"
-  "ccurrence\"4\n\007Symbols\022)\n\006symbol\030\001 \003(\0132\031.P"
-  "rotoIndexStoreDB.SymbolB7\n com.jetbrains"
-  ".swift.indexStoreDBB\021IndexStoreDBProtoP\001"
+  "\022\t\n\005SWIFT\020\002\"<\n\017LightOccurrence\022\013\n\003usr\030\001 "
+  "\001(\t\022\014\n\004line\030\002 \001(\r\022\016\n\006column\030\003 \001(\r\"L\n\021Sym"
+  "bolOccurrences\0227\n\noccurrence\030\001 \003(\0132#.Pro"
+  "toIndexStoreDB.SymbolOccurrence\"P\n\020Light"
+  "Occurrences\022<\n\020light_occurrence\030\001 \003(\0132\"."
+  "ProtoIndexStoreDB.LightOccurrence\"4\n\007Sym"
+  "bols\022)\n\006symbol\030\001 \003(\0132\031.ProtoIndexStoreDB"
+  ".SymbolB7\n com.jetbrains.swift.indexStor"
+  "eDBB\021IndexStoreDBProtoP\001"
   ;
 static ::_pbi::once_flag descriptor_table_Symbol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Symbol_2eproto = {
-    false, false, 2040, descriptor_table_protodef_Symbol_2eproto,
+    false, false, 2184, descriptor_table_protodef_Symbol_2eproto,
     "Symbol.proto",
-    &descriptor_table_Symbol_2eproto_once, nullptr, 0, 7,
+    &descriptor_table_Symbol_2eproto_once, nullptr, 0, 9,
     schemas, file_default_instances, TableStruct_Symbol_2eproto::offsets,
     file_level_metadata_Symbol_2eproto, file_level_enum_descriptors_Symbol_2eproto,
     file_level_service_descriptors_Symbol_2eproto,
@@ -2185,6 +2241,302 @@ void SymbolOccurrence::InternalSwap(SymbolOccurrence* other) {
 
 // ===================================================================
 
+class LightOccurrence::_Internal {
+ public:
+  using HasBits = decltype(std::declval<LightOccurrence>()._impl_._has_bits_);
+  static void set_has_usr(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static void set_has_line(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static void set_has_column(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+};
+
+LightOccurrence::LightOccurrence(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:ProtoIndexStoreDB.LightOccurrence)
+}
+LightOccurrence::LightOccurrence(const LightOccurrence& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  LightOccurrence* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.usr_){}
+    , decltype(_impl_.line_){}
+    , decltype(_impl_.column_){}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.usr_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.usr_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (from._internal_has_usr()) {
+    _this->_impl_.usr_.Set(from._internal_usr(), 
+      _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.line_, &from._impl_.line_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.column_) -
+    reinterpret_cast<char*>(&_impl_.line_)) + sizeof(_impl_.column_));
+  // @@protoc_insertion_point(copy_constructor:ProtoIndexStoreDB.LightOccurrence)
+}
+
+inline void LightOccurrence::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.usr_){}
+    , decltype(_impl_.line_){0u}
+    , decltype(_impl_.column_){0u}
+  };
+  _impl_.usr_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.usr_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+LightOccurrence::~LightOccurrence() {
+  // @@protoc_insertion_point(destructor:ProtoIndexStoreDB.LightOccurrence)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void LightOccurrence::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.usr_.Destroy();
+}
+
+void LightOccurrence::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void LightOccurrence::Clear() {
+// @@protoc_insertion_point(message_clear_start:ProtoIndexStoreDB.LightOccurrence)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _impl_.usr_.ClearNonDefaultToEmpty();
+  }
+  if (cached_has_bits & 0x00000006u) {
+    ::memset(&_impl_.line_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&_impl_.column_) -
+        reinterpret_cast<char*>(&_impl_.line_)) + sizeof(_impl_.column_));
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* LightOccurrence::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // optional string usr = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_usr();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "ProtoIndexStoreDB.LightOccurrence.usr");
+          #endif  // !NDEBUG
+        } else
+          goto handle_unusual;
+        continue;
+      // optional uint32 line = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _Internal::set_has_line(&has_bits);
+          _impl_.line_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional uint32 column = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _Internal::set_has_column(&has_bits);
+          _impl_.column_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  _impl_._has_bits_.Or(has_bits);
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* LightOccurrence::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ProtoIndexStoreDB.LightOccurrence)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional string usr = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->_internal_usr().data(), static_cast<int>(this->_internal_usr().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+      "ProtoIndexStoreDB.LightOccurrence.usr");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_usr(), target);
+  }
+
+  // optional uint32 line = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_line(), target);
+  }
+
+  // optional uint32 column = 3;
+  if (cached_has_bits & 0x00000004u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_column(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ProtoIndexStoreDB.LightOccurrence)
+  return target;
+}
+
+size_t LightOccurrence::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ProtoIndexStoreDB.LightOccurrence)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    // optional string usr = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+          this->_internal_usr());
+    }
+
+    // optional uint32 line = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_line());
+    }
+
+    // optional uint32 column = 3;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_column());
+    }
+
+  }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LightOccurrence::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    LightOccurrence::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LightOccurrence::GetClassData() const { return &_class_data_; }
+
+
+void LightOccurrence::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<LightOccurrence*>(&to_msg);
+  auto& from = static_cast<const LightOccurrence&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ProtoIndexStoreDB.LightOccurrence)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_set_usr(from._internal_usr());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_impl_.line_ = from._impl_.line_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_impl_.column_ = from._impl_.column_;
+    }
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void LightOccurrence::CopyFrom(const LightOccurrence& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ProtoIndexStoreDB.LightOccurrence)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LightOccurrence::IsInitialized() const {
+  return true;
+}
+
+void LightOccurrence::InternalSwap(LightOccurrence* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.usr_, lhs_arena,
+      &other->_impl_.usr_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(LightOccurrence, _impl_.column_)
+      + sizeof(LightOccurrence::_impl_.column_)
+      - PROTOBUF_FIELD_OFFSET(LightOccurrence, _impl_.line_)>(
+          reinterpret_cast<char*>(&_impl_.line_),
+          reinterpret_cast<char*>(&other->_impl_.line_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata LightOccurrence::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Symbol_2eproto_getter, &descriptor_table_Symbol_2eproto_once,
+      file_level_metadata_Symbol_2eproto[5]);
+}
+
+// ===================================================================
+
 class SymbolOccurrences::_Internal {
  public:
 };
@@ -2365,7 +2717,192 @@ void SymbolOccurrences::InternalSwap(SymbolOccurrences* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SymbolOccurrences::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Symbol_2eproto_getter, &descriptor_table_Symbol_2eproto_once,
-      file_level_metadata_Symbol_2eproto[5]);
+      file_level_metadata_Symbol_2eproto[6]);
+}
+
+// ===================================================================
+
+class LightOccurrences::_Internal {
+ public:
+};
+
+LightOccurrences::LightOccurrences(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:ProtoIndexStoreDB.LightOccurrences)
+}
+LightOccurrences::LightOccurrences(const LightOccurrences& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  LightOccurrences* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.light_occurrence_){from._impl_.light_occurrence_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:ProtoIndexStoreDB.LightOccurrences)
+}
+
+inline void LightOccurrences::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.light_occurrence_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+LightOccurrences::~LightOccurrences() {
+  // @@protoc_insertion_point(destructor:ProtoIndexStoreDB.LightOccurrences)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void LightOccurrences::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.light_occurrence_.~RepeatedPtrField();
+}
+
+void LightOccurrences::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void LightOccurrences::Clear() {
+// @@protoc_insertion_point(message_clear_start:ProtoIndexStoreDB.LightOccurrences)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.light_occurrence_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* LightOccurrences::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .ProtoIndexStoreDB.LightOccurrence light_occurrence = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_light_occurrence(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* LightOccurrences::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ProtoIndexStoreDB.LightOccurrences)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .ProtoIndexStoreDB.LightOccurrence light_occurrence = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_light_occurrence_size()); i < n; i++) {
+    const auto& repfield = this->_internal_light_occurrence(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ProtoIndexStoreDB.LightOccurrences)
+  return target;
+}
+
+size_t LightOccurrences::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ProtoIndexStoreDB.LightOccurrences)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .ProtoIndexStoreDB.LightOccurrence light_occurrence = 1;
+  total_size += 1UL * this->_internal_light_occurrence_size();
+  for (const auto& msg : this->_impl_.light_occurrence_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LightOccurrences::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    LightOccurrences::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LightOccurrences::GetClassData() const { return &_class_data_; }
+
+
+void LightOccurrences::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<LightOccurrences*>(&to_msg);
+  auto& from = static_cast<const LightOccurrences&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ProtoIndexStoreDB.LightOccurrences)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.light_occurrence_.MergeFrom(from._impl_.light_occurrence_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void LightOccurrences::CopyFrom(const LightOccurrences& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ProtoIndexStoreDB.LightOccurrences)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LightOccurrences::IsInitialized() const {
+  return true;
+}
+
+void LightOccurrences::InternalSwap(LightOccurrences* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.light_occurrence_.InternalSwap(&other->_impl_.light_occurrence_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata LightOccurrences::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Symbol_2eproto_getter, &descriptor_table_Symbol_2eproto_once,
+      file_level_metadata_Symbol_2eproto[7]);
 }
 
 // ===================================================================
@@ -2550,7 +3087,7 @@ void Symbols::InternalSwap(Symbols* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Symbols::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Symbol_2eproto_getter, &descriptor_table_Symbol_2eproto_once,
-      file_level_metadata_Symbol_2eproto[6]);
+      file_level_metadata_Symbol_2eproto[8]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -2576,9 +3113,17 @@ template<> PROTOBUF_NOINLINE ::ProtoIndexStoreDB::SymbolOccurrence*
 Arena::CreateMaybeMessage< ::ProtoIndexStoreDB::SymbolOccurrence >(Arena* arena) {
   return Arena::CreateMessageInternal< ::ProtoIndexStoreDB::SymbolOccurrence >(arena);
 }
+template<> PROTOBUF_NOINLINE ::ProtoIndexStoreDB::LightOccurrence*
+Arena::CreateMaybeMessage< ::ProtoIndexStoreDB::LightOccurrence >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ProtoIndexStoreDB::LightOccurrence >(arena);
+}
 template<> PROTOBUF_NOINLINE ::ProtoIndexStoreDB::SymbolOccurrences*
 Arena::CreateMaybeMessage< ::ProtoIndexStoreDB::SymbolOccurrences >(Arena* arena) {
   return Arena::CreateMessageInternal< ::ProtoIndexStoreDB::SymbolOccurrences >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ProtoIndexStoreDB::LightOccurrences*
+Arena::CreateMaybeMessage< ::ProtoIndexStoreDB::LightOccurrences >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ProtoIndexStoreDB::LightOccurrences >(arena);
 }
 template<> PROTOBUF_NOINLINE ::ProtoIndexStoreDB::Symbols*
 Arena::CreateMaybeMessage< ::ProtoIndexStoreDB::Symbols >(Arena* arena) {

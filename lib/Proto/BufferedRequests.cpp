@@ -67,6 +67,18 @@ namespace {
         }
     }
 
+    void buildLightOccurrence(ProtoIndexStoreDB::LightOccurrence *dstOccurrence,
+                              IndexStoreDB::SymbolOccurrence *occurrence) {
+        if (!occurrence) return;
+
+        auto symbol = occurrence->getSymbol();
+        if (!symbol) return;
+
+        dstOccurrence->set_usr(symbol->getUSR());
+        dstOccurrence->set_line(occurrence->getLocation().getLine());
+        dstOccurrence->set_column(occurrence->getLocation().getColumn());
+    }
+
     template<typename T>
     uint8_t *convertToByteArray(const T &messageContent) {
         const int messageSize{static_cast<int>(messageContent.ByteSizeLong())};
@@ -145,6 +157,23 @@ namespace Proto {
                                                       if (symbolOccurrence) {
                                                           buildSymbolOccurrence(occurrences.add_occurrence(),
                                                                                 symbolOccurrence);
+                                                      }
+                                                      return true;
+                                                  });
+
+        return convertToByteArray(occurrences);
+    }
+
+    uint8_t *getLightOccurrencesInFilePath(Index *index, indexstoredb_llvm::StringRef path, uint64_t roles) {
+        GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+        ProtoIndexStoreDB::LightOccurrences occurrences;
+        index->value->foreachOccurrenceInFilePath(path, static_cast<IndexStoreDB::SymbolRoleSet>(roles),
+                                                  [&](IndexStoreDB::SymbolOccurrenceRef occurrence) -> bool {
+                                                      IndexStoreDB::SymbolOccurrence *symbolOccurrence{occurrence.get()};
+                                                      if (symbolOccurrence) {
+                                                          buildLightOccurrence(occurrences.add_light_occurrence(),
+                                                                               symbolOccurrence);
                                                       }
                                                       return true;
                                                   });

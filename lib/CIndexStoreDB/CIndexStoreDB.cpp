@@ -355,6 +355,14 @@ indexstoredb_index_occurrences_contained_in_file_path_buffered(_Nonnull indexsto
     return Proto::getOccurrencesInFilePath(obj, path, roles);
 }
 
+uint8_t *
+indexstoredb_index_light_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
+                                                                     const char *_Nonnull path,
+                                                                     uint64_t roles) {
+    auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
+    return Proto::getLightOccurrencesInFilePath(obj, path, roles);
+}
+
 const char *
 indexstoredb_symbol_usr(indexstoredb_symbol_t symbol) {
   auto value = (Symbol *)symbol;

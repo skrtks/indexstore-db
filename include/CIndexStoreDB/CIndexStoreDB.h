@@ -373,7 +373,7 @@ indexstoredb_index_occurrences_contained_in_file_path_buffered(_Nonnull indexsto
 /// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
 /// handled by the caller.
 INDEXSTOREDB_PUBLIC
-uint8_t *_Nullable
+uint8_t *_Nonnull
 indexstoredb_index_light_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
                                                                      const char *_Nonnull path,
                                                                      uint64_t roles);

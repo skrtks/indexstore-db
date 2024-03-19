@@ -46,6 +46,12 @@ struct TableStruct_Symbol_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Symbol_2eproto;
 namespace ProtoIndexStoreDB {
+class LightOccurrence;
+struct LightOccurrenceDefaultTypeInternal;
+extern LightOccurrenceDefaultTypeInternal _LightOccurrence_default_instance_;
+class LightOccurrences;
+struct LightOccurrencesDefaultTypeInternal;
+extern LightOccurrencesDefaultTypeInternal _LightOccurrences_default_instance_;
 class Symbol;
 struct SymbolDefaultTypeInternal;
 extern SymbolDefaultTypeInternal _Symbol_default_instance_;
@@ -69,6 +75,8 @@ struct SymbolsDefaultTypeInternal;
 extern SymbolsDefaultTypeInternal _Symbols_default_instance_;
 }  // namespace ProtoIndexStoreDB
 PROTOBUF_NAMESPACE_OPEN
+template<> ::ProtoIndexStoreDB::LightOccurrence* Arena::CreateMaybeMessage<::ProtoIndexStoreDB::LightOccurrence>(Arena*);
+template<> ::ProtoIndexStoreDB::LightOccurrences* Arena::CreateMaybeMessage<::ProtoIndexStoreDB::LightOccurrences>(Arena*);
 template<> ::ProtoIndexStoreDB::Symbol* Arena::CreateMaybeMessage<::ProtoIndexStoreDB::Symbol>(Arena*);
 template<> ::ProtoIndexStoreDB::SymbolInfo* Arena::CreateMaybeMessage<::ProtoIndexStoreDB::SymbolInfo>(Arena*);
 template<> ::ProtoIndexStoreDB::SymbolOccurrence* Arena::CreateMaybeMessage<::ProtoIndexStoreDB::SymbolOccurrence>(Arena*);
@@ -1503,6 +1511,201 @@ class SymbolOccurrence final :
 };
 // -------------------------------------------------------------------
 
+class LightOccurrence final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProtoIndexStoreDB.LightOccurrence) */ {
+ public:
+  inline LightOccurrence() : LightOccurrence(nullptr) {}
+  ~LightOccurrence() override;
+  explicit PROTOBUF_CONSTEXPR LightOccurrence(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LightOccurrence(const LightOccurrence& from);
+  LightOccurrence(LightOccurrence&& from) noexcept
+    : LightOccurrence() {
+    *this = ::std::move(from);
+  }
+
+  inline LightOccurrence& operator=(const LightOccurrence& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LightOccurrence& operator=(LightOccurrence&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LightOccurrence& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LightOccurrence* internal_default_instance() {
+    return reinterpret_cast<const LightOccurrence*>(
+               &_LightOccurrence_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(LightOccurrence& a, LightOccurrence& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LightOccurrence* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LightOccurrence* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LightOccurrence* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LightOccurrence>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LightOccurrence& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LightOccurrence& from) {
+    LightOccurrence::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LightOccurrence* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ProtoIndexStoreDB.LightOccurrence";
+  }
+  protected:
+  explicit LightOccurrence(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUsrFieldNumber = 1,
+    kLineFieldNumber = 2,
+    kColumnFieldNumber = 3,
+  };
+  // optional string usr = 1;
+  bool has_usr() const;
+  private:
+  bool _internal_has_usr() const;
+  public:
+  void clear_usr();
+  const std::string& usr() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_usr(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_usr();
+  PROTOBUF_NODISCARD std::string* release_usr();
+  void set_allocated_usr(std::string* usr);
+  private:
+  const std::string& _internal_usr() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_usr(const std::string& value);
+  std::string* _internal_mutable_usr();
+  public:
+
+  // optional uint32 line = 2;
+  bool has_line() const;
+  private:
+  bool _internal_has_line() const;
+  public:
+  void clear_line();
+  uint32_t line() const;
+  void set_line(uint32_t value);
+  private:
+  uint32_t _internal_line() const;
+  void _internal_set_line(uint32_t value);
+  public:
+
+  // optional uint32 column = 3;
+  bool has_column() const;
+  private:
+  bool _internal_has_column() const;
+  public:
+  void clear_column();
+  uint32_t column() const;
+  void set_column(uint32_t value);
+  private:
+  uint32_t _internal_column() const;
+  void _internal_set_column(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:ProtoIndexStoreDB.LightOccurrence)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr usr_;
+    uint32_t line_;
+    uint32_t column_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Symbol_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SymbolOccurrences final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProtoIndexStoreDB.SymbolOccurrences) */ {
  public:
@@ -1558,7 +1761,7 @@ class SymbolOccurrences final :
                &_SymbolOccurrences_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(SymbolOccurrences& a, SymbolOccurrences& b) {
     a.Swap(&b);
@@ -1667,6 +1870,170 @@ class SymbolOccurrences final :
 };
 // -------------------------------------------------------------------
 
+class LightOccurrences final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProtoIndexStoreDB.LightOccurrences) */ {
+ public:
+  inline LightOccurrences() : LightOccurrences(nullptr) {}
+  ~LightOccurrences() override;
+  explicit PROTOBUF_CONSTEXPR LightOccurrences(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LightOccurrences(const LightOccurrences& from);
+  LightOccurrences(LightOccurrences&& from) noexcept
+    : LightOccurrences() {
+    *this = ::std::move(from);
+  }
+
+  inline LightOccurrences& operator=(const LightOccurrences& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LightOccurrences& operator=(LightOccurrences&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LightOccurrences& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LightOccurrences* internal_default_instance() {
+    return reinterpret_cast<const LightOccurrences*>(
+               &_LightOccurrences_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(LightOccurrences& a, LightOccurrences& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LightOccurrences* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LightOccurrences* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LightOccurrences* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LightOccurrences>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LightOccurrences& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LightOccurrences& from) {
+    LightOccurrences::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LightOccurrences* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ProtoIndexStoreDB.LightOccurrences";
+  }
+  protected:
+  explicit LightOccurrences(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kLightOccurrenceFieldNumber = 1,
+  };
+  // repeated .ProtoIndexStoreDB.LightOccurrence light_occurrence = 1;
+  int light_occurrence_size() const;
+  private:
+  int _internal_light_occurrence_size() const;
+  public:
+  void clear_light_occurrence();
+  ::ProtoIndexStoreDB::LightOccurrence* mutable_light_occurrence(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProtoIndexStoreDB::LightOccurrence >*
+      mutable_light_occurrence();
+  private:
+  const ::ProtoIndexStoreDB::LightOccurrence& _internal_light_occurrence(int index) const;
+  ::ProtoIndexStoreDB::LightOccurrence* _internal_add_light_occurrence();
+  public:
+  const ::ProtoIndexStoreDB::LightOccurrence& light_occurrence(int index) const;
+  ::ProtoIndexStoreDB::LightOccurrence* add_light_occurrence();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProtoIndexStoreDB::LightOccurrence >&
+      light_occurrence() const;
+
+  // @@protoc_insertion_point(class_scope:ProtoIndexStoreDB.LightOccurrences)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProtoIndexStoreDB::LightOccurrence > light_occurrence_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Symbol_2eproto;
+};
+// -------------------------------------------------------------------
+
 class Symbols final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProtoIndexStoreDB.Symbols) */ {
  public:
@@ -1722,7 +2089,7 @@ class Symbols final :
                &_Symbols_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    8;
 
   friend void swap(Symbols& a, Symbols& b) {
     a.Swap(&b);
@@ -2882,6 +3249,134 @@ SymbolOccurrence::relations() const {
 
 // -------------------------------------------------------------------
 
+// LightOccurrence
+
+// optional string usr = 1;
+inline bool LightOccurrence::_internal_has_usr() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool LightOccurrence::has_usr() const {
+  return _internal_has_usr();
+}
+inline void LightOccurrence::clear_usr() {
+  _impl_.usr_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& LightOccurrence::usr() const {
+  // @@protoc_insertion_point(field_get:ProtoIndexStoreDB.LightOccurrence.usr)
+  return _internal_usr();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void LightOccurrence::set_usr(ArgT0&& arg0, ArgT... args) {
+ _impl_._has_bits_[0] |= 0x00000001u;
+ _impl_.usr_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProtoIndexStoreDB.LightOccurrence.usr)
+}
+inline std::string* LightOccurrence::mutable_usr() {
+  std::string* _s = _internal_mutable_usr();
+  // @@protoc_insertion_point(field_mutable:ProtoIndexStoreDB.LightOccurrence.usr)
+  return _s;
+}
+inline const std::string& LightOccurrence::_internal_usr() const {
+  return _impl_.usr_.Get();
+}
+inline void LightOccurrence::_internal_set_usr(const std::string& value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.usr_.Set(value, GetArenaForAllocation());
+}
+inline std::string* LightOccurrence::_internal_mutable_usr() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.usr_.Mutable(GetArenaForAllocation());
+}
+inline std::string* LightOccurrence::release_usr() {
+  // @@protoc_insertion_point(field_release:ProtoIndexStoreDB.LightOccurrence.usr)
+  if (!_internal_has_usr()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.usr_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.usr_.IsDefault()) {
+    _impl_.usr_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
+}
+inline void LightOccurrence::set_allocated_usr(std::string* usr) {
+  if (usr != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.usr_.SetAllocated(usr, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.usr_.IsDefault()) {
+    _impl_.usr_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProtoIndexStoreDB.LightOccurrence.usr)
+}
+
+// optional uint32 line = 2;
+inline bool LightOccurrence::_internal_has_line() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool LightOccurrence::has_line() const {
+  return _internal_has_line();
+}
+inline void LightOccurrence::clear_line() {
+  _impl_.line_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline uint32_t LightOccurrence::_internal_line() const {
+  return _impl_.line_;
+}
+inline uint32_t LightOccurrence::line() const {
+  // @@protoc_insertion_point(field_get:ProtoIndexStoreDB.LightOccurrence.line)
+  return _internal_line();
+}
+inline void LightOccurrence::_internal_set_line(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.line_ = value;
+}
+inline void LightOccurrence::set_line(uint32_t value) {
+  _internal_set_line(value);
+  // @@protoc_insertion_point(field_set:ProtoIndexStoreDB.LightOccurrence.line)
+}
+
+// optional uint32 column = 3;
+inline bool LightOccurrence::_internal_has_column() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool LightOccurrence::has_column() const {
+  return _internal_has_column();
+}
+inline void LightOccurrence::clear_column() {
+  _impl_.column_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline uint32_t LightOccurrence::_internal_column() const {
+  return _impl_.column_;
+}
+inline uint32_t LightOccurrence::column() const {
+  // @@protoc_insertion_point(field_get:ProtoIndexStoreDB.LightOccurrence.column)
+  return _internal_column();
+}
+inline void LightOccurrence::_internal_set_column(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_.column_ = value;
+}
+inline void LightOccurrence::set_column(uint32_t value) {
+  _internal_set_column(value);
+  // @@protoc_insertion_point(field_set:ProtoIndexStoreDB.LightOccurrence.column)
+}
+
+// -------------------------------------------------------------------
+
 // SymbolOccurrences
 
 // repeated .ProtoIndexStoreDB.SymbolOccurrence occurrence = 1;
@@ -2922,6 +3417,50 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProtoIndexStoreDB::Sym
 SymbolOccurrences::occurrence() const {
   // @@protoc_insertion_point(field_list:ProtoIndexStoreDB.SymbolOccurrences.occurrence)
   return _impl_.occurrence_;
+}
+
+// -------------------------------------------------------------------
+
+// LightOccurrences
+
+// repeated .ProtoIndexStoreDB.LightOccurrence light_occurrence = 1;
+inline int LightOccurrences::_internal_light_occurrence_size() const {
+  return _impl_.light_occurrence_.size();
+}
+inline int LightOccurrences::light_occurrence_size() const {
+  return _internal_light_occurrence_size();
+}
+inline void LightOccurrences::clear_light_occurrence() {
+  _impl_.light_occurrence_.Clear();
+}
+inline ::ProtoIndexStoreDB::LightOccurrence* LightOccurrences::mutable_light_occurrence(int index) {
+  // @@protoc_insertion_point(field_mutable:ProtoIndexStoreDB.LightOccurrences.light_occurrence)
+  return _impl_.light_occurrence_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProtoIndexStoreDB::LightOccurrence >*
+LightOccurrences::mutable_light_occurrence() {
+  // @@protoc_insertion_point(field_mutable_list:ProtoIndexStoreDB.LightOccurrences.light_occurrence)
+  return &_impl_.light_occurrence_;
+}
+inline const ::ProtoIndexStoreDB::LightOccurrence& LightOccurrences::_internal_light_occurrence(int index) const {
+  return _impl_.light_occurrence_.Get(index);
+}
+inline const ::ProtoIndexStoreDB::LightOccurrence& LightOccurrences::light_occurrence(int index) const {
+  // @@protoc_insertion_point(field_get:ProtoIndexStoreDB.LightOccurrences.light_occurrence)
+  return _internal_light_occurrence(index);
+}
+inline ::ProtoIndexStoreDB::LightOccurrence* LightOccurrences::_internal_add_light_occurrence() {
+  return _impl_.light_occurrence_.Add();
+}
+inline ::ProtoIndexStoreDB::LightOccurrence* LightOccurrences::add_light_occurrence() {
+  ::ProtoIndexStoreDB::LightOccurrence* _add = _internal_add_light_occurrence();
+  // @@protoc_insertion_point(field_add:ProtoIndexStoreDB.LightOccurrences.light_occurrence)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProtoIndexStoreDB::LightOccurrence >&
+LightOccurrences::light_occurrence() const {
+  // @@protoc_insertion_point(field_list:ProtoIndexStoreDB.LightOccurrences.light_occurrence)
+  return _impl_.light_occurrence_;
 }
 
 // -------------------------------------------------------------------
@@ -2971,6 +3510,10 @@ Symbols::symbol() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

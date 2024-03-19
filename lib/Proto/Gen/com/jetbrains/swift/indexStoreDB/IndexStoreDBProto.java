@@ -40,10 +40,20 @@ public final class IndexStoreDBProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ProtoIndexStoreDB_SymbolOccurrence_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ProtoIndexStoreDB_LightOccurrence_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ProtoIndexStoreDB_LightOccurrence_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ProtoIndexStoreDB_SymbolOccurrences_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ProtoIndexStoreDB_SymbolOccurrences_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ProtoIndexStoreDB_LightOccurrences_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ProtoIndexStoreDB_LightOccurrences_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ProtoIndexStoreDB_Symbols_descriptor;
   static final 
@@ -104,11 +114,15 @@ public final class IndexStoreDBProto {
       "Occurrence.ProviderKind\022\016\n\006target\030\005 \001(\t\022" +
       "4\n\trelations\030\006 \003(\0132!.ProtoIndexStoreDB.S" +
       "ymbolRelation\"$\n\014ProviderKind\022\t\n\005CLANG\020\001" +
-      "\022\t\n\005SWIFT\020\002\"L\n\021SymbolOccurrences\0227\n\noccu" +
-      "rrence\030\001 \003(\0132#.ProtoIndexStoreDB.SymbolO" +
-      "ccurrence\"4\n\007Symbols\022)\n\006symbol\030\001 \003(\0132\031.P" +
-      "rotoIndexStoreDB.SymbolB7\n com.jetbrains" +
-      ".swift.indexStoreDBB\021IndexStoreDBProtoP\001"
+      "\022\t\n\005SWIFT\020\002\"<\n\017LightOccurrence\022\013\n\003usr\030\001 " +
+      "\001(\t\022\014\n\004line\030\002 \001(\r\022\016\n\006column\030\003 \001(\r\"L\n\021Sym" +
+      "bolOccurrences\0227\n\noccurrence\030\001 \003(\0132#.Pro" +
+      "toIndexStoreDB.SymbolOccurrence\"P\n\020Light" +
+      "Occurrences\022<\n\020light_occurrence\030\001 \003(\0132\"." +
+      "ProtoIndexStoreDB.LightOccurrence\"4\n\007Sym" +
+      "bols\022)\n\006symbol\030\001 \003(\0132\031.ProtoIndexStoreDB" +
+      ".SymbolB7\n com.jetbrains.swift.indexStor" +
+      "eDBB\021IndexStoreDBProtoP\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -144,14 +158,26 @@ public final class IndexStoreDBProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ProtoIndexStoreDB_SymbolOccurrence_descriptor,
         new java.lang.String[] { "Symbol", "Roles", "Location", "ProviderKind", "Target", "Relations", });
-    internal_static_ProtoIndexStoreDB_SymbolOccurrences_descriptor =
+    internal_static_ProtoIndexStoreDB_LightOccurrence_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_ProtoIndexStoreDB_LightOccurrence_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ProtoIndexStoreDB_LightOccurrence_descriptor,
+        new java.lang.String[] { "Usr", "Line", "Column", });
+    internal_static_ProtoIndexStoreDB_SymbolOccurrences_descriptor =
+      getDescriptor().getMessageTypes().get(6);
     internal_static_ProtoIndexStoreDB_SymbolOccurrences_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ProtoIndexStoreDB_SymbolOccurrences_descriptor,
         new java.lang.String[] { "Occurrence", });
+    internal_static_ProtoIndexStoreDB_LightOccurrences_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_ProtoIndexStoreDB_LightOccurrences_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ProtoIndexStoreDB_LightOccurrences_descriptor,
+        new java.lang.String[] { "LightOccurrence", });
     internal_static_ProtoIndexStoreDB_Symbols_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_ProtoIndexStoreDB_Symbols_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ProtoIndexStoreDB_Symbols_descriptor,

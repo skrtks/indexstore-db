@@ -109,8 +109,18 @@ message SymbolOccurrence {
   repeated SymbolRelation relations = 6;
 }
 
+message LightOccurrence {
+  optional string usr = 1;
+  optional uint32 line = 2;
+  optional uint32 column = 3;
+}
+
 message SymbolOccurrences {
   repeated SymbolOccurrence occurrence = 1;
+}
+
+message LightOccurrences {
+  repeated LightOccurrence light_occurrence = 1;
 }
 
 message Symbols {

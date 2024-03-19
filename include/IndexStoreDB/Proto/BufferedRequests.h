@@ -19,6 +19,8 @@ namespace Proto {
     uint8_t *getSymbolsInFilePath(Index *index, indexstoredb_llvm::StringRef path);
 
     uint8_t *getOccurrencesInFilePath(Index *occurrence, indexstoredb_llvm::StringRef path, uint64_t roles);
+
+    uint8_t *getLightOccurrencesInFilePath(Index *occurrence, indexstoredb_llvm::StringRef path, uint64_t roles);
 }
 
 #endif //INDEXSTOREDB_PROTOBASEDREQUESTS_H
