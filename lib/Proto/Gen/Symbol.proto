@@ -1,0 +1,118 @@
+syntax = "proto2";
+
+package ProtoIndexStoreDB;
+
+option java_package = "com.jetbrains.swift.indexStoreDB";
+option java_multiple_files = true;
+option java_outer_classname = "IndexStoreDBProto";
+
+// The content of this files reflects lib/Core/include/IndexStoreDB/Core/Symbol.h
+
+message SymbolInfo {
+  enum Kind {
+    UNKNOWN = 0;
+    MODULE = 1;
+    NAMESPACE = 2;
+    NAMESPACE_ALIAS = 3;
+    MACRO = 4;
+    ENUM = 5;
+    STRUCT = 6;
+    CLASS = 7;
+    PROTOCOL = 8;
+    EXTENSION = 9;
+    UNION = 10;
+    TYPE_ALIAS = 11;
+    FUNCTION = 12;
+    VARIABLE = 13;
+    PARAMETER = 14;
+    FIELD = 15;
+    ENUM_CONSTANT = 16;
+    INSTANCE_METHOD = 17;
+    CLASS_METHOD = 18;
+    STATIC_METHOD = 19;
+    INSTANCE_PROPERTY = 20;
+    CLASS_PROPERTY = 21;
+    STATIC_PROPERTY = 22;
+    CONSTRUCTOR = 23;
+    DESTRUCTOR = 24;
+    CONVERSION_FUNCTION = 25;
+    CONCEPT = 26;
+    COMMENT_TAG = 27;
+  }
+
+  enum SubKind {
+    NONE = 0;
+    CXX_COPY_CONSTRUCTOR = 1;
+    CXX_MOVE_CONSTRUCTOR = 2;
+    ACCESSOR_GETTER = 3;
+    ACCESSOR_SETTER = 4;
+    // Swift sub-kinds
+    SWIFT_ACCESSOR_WILL_SET = 5;
+    SWIFT_ACCESSOR_DID_SET = 6;
+    SWIFT_ACCESSOR_ADDRESSOR = 7;
+    SWIFT_ACCESSOR_MUTABLE_ADDRESSOR = 8;
+    SWIFT_EXTENSION_OF_STRUCT = 9;
+    SWIFT_EXTENSION_OF_CLASS = 10;
+    SWIFT_EXTENSION_OF_ENUM = 11;
+    SWIFT_EXTENSION_OF_PROTOCOL = 12;
+    SWIFT_PREFIX_OPERATOR = 13;
+    SWIFT_POSTFIX_OPERATOR = 14;
+    SWIFT_INFIX_OPERATOR = 15;
+    SWIFT_SUBSCRIPT = 16;
+    SWIFT_ASSOCIATED_TYPE = 17;
+    SWIFT_GENERIC_TYPE_PARAM = 18;
+  }
+
+  enum Language {
+    C = 0;
+    OBJC = 1;
+    CXX = 2;
+    SWIFT = 3;
+  }
+
+  optional Kind kind = 1;
+  optional SubKind sub_kind = 2;
+  optional uint32 properties = 3;
+  optional Language language = 4;
+}
+
+message Symbol {
+  optional SymbolInfo info = 1;
+  optional string name = 2;
+  optional string usr = 3;
+}
+
+message SymbolRelation {
+  optional uint64 roles = 1;
+  optional Symbol symbol = 2;
+}
+
+message SymbolOccurrenceLocation {
+  optional string path = 1;
+  optional string module_name = 2;
+  optional uint32 line = 3;
+  optional uint32 column = 4;
+  optional bool is_system = 5;
+}
+
+message SymbolOccurrence {
+  enum ProviderKind {
+    CLANG = 1;
+    SWIFT = 2;
+  }
+
+  optional Symbol symbol = 1;
+  optional uint64 roles = 2;
+  optional SymbolOccurrenceLocation location = 3;
+  optional ProviderKind provider_kind = 4;
+  optional string target = 5;
+  repeated SymbolRelation relations = 6;
+}
+
+message SymbolOccurrences {
+  repeated SymbolOccurrence occurrence = 1;
+}
+
+message Symbols {
+  repeated Symbol symbol = 1;
+}
