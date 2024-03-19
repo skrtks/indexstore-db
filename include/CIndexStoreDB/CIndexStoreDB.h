@@ -310,6 +310,16 @@ indexstoredb_index_symbol_occurrences_by_usr(
     uint64_t roles,
     _Nonnull indexstoredb_symbol_occurrence_receiver_t);
 
+/// Collects all symbol occurrences that match the provided \p usr and \p roles.
+///
+/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
+/// handled by the caller.
+INDEXSTOREDB_PUBLIC uint8_t *_Nullable
+indexstoredb_index_symbol_occurrences_by_usr_buffered(
+        _Nonnull indexstoredb_index_t index,
+        const char *_Nonnull usr,
+        uint64_t roles);
+
 /// Iterates over each symbol occurrence related to the \p usr with \p roles.
 ///
 /// The occurrence passed to the receiver is only valid for the duration of the
@@ -330,6 +340,15 @@ indexstoredb_index_symbols_contained_in_file_path(_Nonnull indexstoredb_index_t 
                                                   const char *_Nonnull path,
                                                   _Nonnull indexstoredb_symbol_receiver_t);
 
+/// Iterates over all the symbols contained in \p path
+///
+/// The symbols are serialized and returned in a byte array. Release of the memory allocated for this array should be
+/// handled by the caller.
+INDEXSTOREDB_PUBLIC
+uint8_t *_Nullable
+indexstoredb_index_symbols_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
+                                                           const char *_Nonnull path);
+
 /// Iterates over all the occurrences contained in \p path
 ///
 /// The occurrence passed to the receiver is only valid for the duration of the
@@ -338,6 +357,26 @@ INDEXSTOREDB_PUBLIC bool
 indexstoredb_index_occurrences_contained_in_file_path(_Nonnull indexstoredb_index_t index, const char *_Nonnull path,
                                                       uint64_t roles,
                                                       _Nonnull indexstoredb_symbol_occurrence_receiver_t);
+
+/// Iterates over all the occurrences contained in \p path
+///
+/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
+/// handled by the caller.
+INDEXSTOREDB_PUBLIC
+uint8_t *_Nullable
+indexstoredb_index_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
+                                                               const char *_Nonnull path,
+                                                               uint64_t roles);
+
+/// Iterates over all the occurrences contained in \p path. Collects only USR, line and column for the occurrence.
+///
+/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
+/// handled by the caller.
+INDEXSTOREDB_PUBLIC
+uint8_t *_Nullable
+indexstoredb_index_light_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
+                                                                     const char *_Nonnull path,
+                                                                     uint64_t roles);
 
 /// Returns the USR of the given symbol.
 ///
@@ -444,6 +483,23 @@ indexstoredb_index_canonical_symbol_occurences_by_name(
     indexstoredb_index_t _Nonnull index,
     const char *_Nonnull symbolName,
     indexstoredb_symbol_occurrence_receiver_t _Nonnull receiver
+);
+
+/// Iterates over every canonical symbol that matches the string.
+///
+/// \param index An IndexStoreDB object which contains the symbols.
+/// \param symbolName The name of the symbol whose canonical occurence should be found.
+/// \param receiver A function to be called for each canonical occurence.
+/// The canonical symbol occurrence will be passed in to this function. It is valid only for the
+/// duration of the call. The function should return true to continue iterating.
+///
+/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
+/// handled by the caller.
+INDEXSTOREDB_PUBLIC
+uint8_t* _Nullable
+indexstoredb_index_canonical_symbol_occurrences_by_name_buffered(
+    indexstoredb_index_t _Nonnull index,
+    const char *_Nonnull symbolName
 );
 
 /// Iterates over every canonical symbol that matches the pattern.

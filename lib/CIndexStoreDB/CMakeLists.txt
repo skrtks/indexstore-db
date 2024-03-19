@@ -7,7 +7,8 @@ target_include_directories(CIndexStoreDB PUBLIC
 target_link_libraries(CIndexStoreDB PRIVATE
   LLVMSupport)
 target_link_libraries(CIndexStoreDB PUBLIC
-  Index)
+  Index
+  Proto)
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Darwin)
   target_link_libraries(CIndexStoreDB PRIVATE
     dispatch)
@@ -23,4 +24,5 @@ target_link_libraries(IndexStoreDB
         ${CORESERVICES_FRAMEWORK}
         ${FOUNDATION_FRAMEWORK}
         Index
+        Proto
 )

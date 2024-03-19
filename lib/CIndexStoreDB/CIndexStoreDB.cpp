@@ -19,6 +19,7 @@
 #include "IndexStoreDB/Core/Symbol.h"
 #include "indexstore/IndexStoreCXX.h"
 #include "llvm/ADT/IntrusiveRefCntPtr.h"
+#include "IndexStoreDB/Proto/BufferedRequests.h"
 #include <Block.h>
 
 using namespace IndexStoreDB;
@@ -295,6 +296,15 @@ indexstoredb_index_symbol_occurrences_by_usr(
     });
 }
 
+uint8_t *
+indexstoredb_index_symbol_occurrences_by_usr_buffered(
+        indexstoredb_index_t index,
+        const char *usr,
+        uint64_t roles) {
+    auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
+    return Proto::getOccurrencesForUsr(obj, usr, roles);
+}
+
 bool
 indexstoredb_index_related_symbol_occurrences_by_usr(
     indexstoredb_index_t index,
@@ -319,6 +329,13 @@ indexstoredb_index_symbols_contained_in_file_path(_Nonnull indexstoredb_index_t 
   });
 }
 
+uint8_t *
+indexstoredb_index_symbols_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
+                                                           const char *_Nonnull path) {
+    auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
+    return Proto::getSymbolsInFilePath(obj, path);
+}
+
 bool
 indexstoredb_index_occurrences_contained_in_file_path(_Nonnull indexstoredb_index_t index, const char *_Nonnull path,
                                                       uint64_t roles,
@@ -328,6 +345,14 @@ indexstoredb_index_occurrences_contained_in_file_path(_Nonnull indexstoredb_inde
                                                  [&](SymbolOccurrenceRef Occur) -> bool {
                                                    return receiver((indexstoredb_symbol_occurrence_t)Occur.get());
                                                  });
+}
+
+uint8_t *
+indexstoredb_index_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
+                                                               const char *_Nonnull path,
+                                                               uint64_t roles) {
+    auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
+    return Proto::getOccurrencesInFilePath(obj, path, roles);
 }
 
 const char *
@@ -387,6 +412,14 @@ indexstoredb_index_canonical_symbol_occurences_by_name(
   return obj->value->foreachCanonicalSymbolOccurrenceByName(symbolName, [&](SymbolOccurrenceRef occur) -> bool {
     return receiver((indexstoredb_symbol_occurrence_t)occur.get());
   });
+}
+
+uint8_t *
+indexstoredb_index_canonical_symbol_occurrences_by_name_buffered(
+        indexstoredb_index_t index,
+        const char *_Nonnull symbolName) {
+    auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
+    return Proto::getCanonicalSymbolOccurrencesByName(obj, symbolName);
 }
 
 bool
