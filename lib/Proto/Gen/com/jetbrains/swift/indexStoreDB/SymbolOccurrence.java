@@ -28,11 +28,6 @@ private static final long serialVersionUID = 0L;
     return new SymbolOccurrence();
   }
 
-  @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
-  }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return com.jetbrains.swift.indexStoreDB.IndexStoreDBProto.internal_static_ProtoIndexStoreDB_SymbolOccurrence_descriptor;
@@ -512,11 +507,13 @@ private static final long serialVersionUID = 0L;
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
+
   public static com.jetbrains.swift.indexStoreDB.SymbolOccurrence parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
+
   public static com.jetbrains.swift.indexStoreDB.SymbolOccurrence parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -939,8 +936,10 @@ private static final long serialVersionUID = 0L;
       } else {
         symbolBuilder_.mergeFrom(value);
       }
-      bitField0_ |= 0x00000001;
-      onChanged();
+      if (symbol_ != null) {
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
       return this;
     }
     /**
@@ -1015,7 +1014,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder setRoles(long value) {
-      
+
       roles_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
@@ -1098,8 +1097,10 @@ private static final long serialVersionUID = 0L;
       } else {
         locationBuilder_.mergeFrom(value);
       }
-      bitField0_ |= 0x00000004;
-      onChanged();
+      if (location_ != null) {
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
       return this;
     }
     /**
