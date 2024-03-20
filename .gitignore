@@ -9,3 +9,5 @@ Package.resolved
 /*.sublime-workspace
 .*.sw?
 /.idea/
+/third_party/protobuf/bin/
+/third_party/protobuf/cache/
