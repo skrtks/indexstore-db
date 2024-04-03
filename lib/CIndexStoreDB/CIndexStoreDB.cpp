@@ -296,13 +296,13 @@ indexstoredb_index_symbol_occurrences_by_usr(
     });
 }
 
-uint8_t *
-indexstoredb_index_symbol_occurrences_by_usr_buffered(
-        indexstoredb_index_t index,
-        const char *usr,
-        uint64_t roles) {
+void
+indexstoredb_index_symbol_occurrences_by_usr_buffered(_Nonnull indexstoredb_index_t index,
+                                                      const char *usr,
+                                                      uint64_t roles,
+                                                      _Nonnull indexstoredb_byte_array_receiver_t receiver) {
     auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
-    return Proto::getOccurrencesForUsr(obj, usr, roles);
+    receiver(Proto::getOccurrencesForUsr(obj, usr, roles).get());
 }
 
 bool
@@ -329,11 +329,12 @@ indexstoredb_index_symbols_contained_in_file_path(_Nonnull indexstoredb_index_t 
   });
 }
 
-uint8_t *
+void
 indexstoredb_index_symbols_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
-                                                           const char *_Nonnull path) {
+                                                           const char *_Nonnull path,
+                                                           _Nonnull indexstoredb_byte_array_receiver_t receiver) {
     auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
-    return Proto::getSymbolsInFilePath(obj, path);
+    receiver(Proto::getSymbolsInFilePath(obj, path).get());
 }
 
 bool
@@ -347,20 +348,22 @@ indexstoredb_index_occurrences_contained_in_file_path(_Nonnull indexstoredb_inde
                                                  });
 }
 
-uint8_t *
+void
 indexstoredb_index_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
                                                                const char *_Nonnull path,
-                                                               uint64_t roles) {
+                                                               uint64_t roles,
+                                                               _Nonnull indexstoredb_byte_array_receiver_t receiver) {
     auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
-    return Proto::getOccurrencesInFilePath(obj, path, roles);
+    receiver(Proto::getOccurrencesInFilePath(obj, path, roles).get());
 }
 
-uint8_t *
+void
 indexstoredb_index_light_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
                                                                      const char *_Nonnull path,
-                                                                     uint64_t roles) {
+                                                                     uint64_t roles,
+                                                                     _Nonnull indexstoredb_byte_array_receiver_t receiver) {
     auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
-    return Proto::getLightOccurrencesInFilePath(obj, path, roles);
+    receiver(Proto::getLightOccurrencesInFilePath(obj, path, roles).get());
 }
 
 const char *
@@ -422,12 +425,12 @@ indexstoredb_index_canonical_symbol_occurences_by_name(
   });
 }
 
-uint8_t *
-indexstoredb_index_canonical_symbol_occurrences_by_name_buffered(
-        indexstoredb_index_t index,
-        const char *_Nonnull symbolName) {
+void
+indexstoredb_index_canonical_symbol_occurrences_by_name_buffered(_Nonnull indexstoredb_index_t index,
+                                                                 const char *_Nonnull symbolName,
+                                                                 _Nonnull indexstoredb_byte_array_receiver_t receiver) {
     auto obj = (Object<std::shared_ptr<IndexSystem>> *) index;
-    return Proto::getCanonicalSymbolOccurrencesByName(obj, symbolName);
+    receiver(Proto::getCanonicalSymbolOccurrencesByName(obj, symbolName).get());
 }
 
 bool

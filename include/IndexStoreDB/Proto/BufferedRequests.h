@@ -5,22 +5,25 @@
 #ifndef INDEXSTOREDB_PROTOBASEDREQUESTS_H
 #define INDEXSTOREDB_PROTOBASEDREQUESTS_H
 
-#include <string>
+#include "IndexStoreDB/Support/LLVM.h"
+#include <memory>
 #include "CIndexStoreDB/CIndexStoreDB_Internal.h"
 #include "IndexStoreDB/Index/IndexSystem.h"
 
 namespace Proto {
-    typedef IndexStoreDB::internal::Object<std::shared_ptr<IndexStoreDB::index::IndexSystem>> Index;
+    using Index = IndexStoreDB::internal::Object<std::shared_ptr<IndexStoreDB::index::IndexSystem>>;
+    using ProtobufByteArray = std::unique_ptr<uint8_t[]>;
+    using StringRef = indexstoredb_llvm::StringRef;
 
-    uint8_t *getOccurrencesForUsr(Index *index, const char *usr, uint64_t roles);
+    ProtobufByteArray getOccurrencesForUsr(Index *index, StringRef usr, uint64_t roles);
 
-    uint8_t *getCanonicalSymbolOccurrencesByName(Index *occurrence, indexstoredb_llvm::StringRef name);
+    ProtobufByteArray getCanonicalSymbolOccurrencesByName(Index *index, StringRef name);
 
-    uint8_t *getSymbolsInFilePath(Index *index, indexstoredb_llvm::StringRef path);
+    ProtobufByteArray getSymbolsInFilePath(Index *index, StringRef path);
 
-    uint8_t *getOccurrencesInFilePath(Index *occurrence, indexstoredb_llvm::StringRef path, uint64_t roles);
+    ProtobufByteArray getOccurrencesInFilePath(Index *index, StringRef path, uint64_t roles);
 
-    uint8_t *getLightOccurrencesInFilePath(Index *occurrence, indexstoredb_llvm::StringRef path, uint64_t roles);
+    ProtobufByteArray getLightOccurrencesInFilePath(Index *index, StringRef path, uint64_t roles);
 }
 
 #endif //INDEXSTOREDB_PROTOBASEDREQUESTS_H

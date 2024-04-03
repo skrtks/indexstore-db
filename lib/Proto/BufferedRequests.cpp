@@ -7,6 +7,8 @@
 #include "Gen/Symbol.pb.h"
 
 namespace {
+    using namespace Proto;
+
     void buildSymbolInfo(ProtoIndexStoreDB::SymbolInfo *dstSymbolInfo, const IndexStoreDB::SymbolInfo &symbolInfo) {
         dstSymbolInfo->set_kind(static_cast<ProtoIndexStoreDB::SymbolInfo_Kind>(symbolInfo.Kind));
         dstSymbolInfo->set_sub_kind(static_cast<ProtoIndexStoreDB::SymbolInfo_SubKind>(symbolInfo.SubKind));
@@ -80,16 +82,14 @@ namespace {
     }
 
     template<typename T>
-    uint8_t *convertToByteArray(const T &messageContent) {
+    ProtobufByteArray convertToByteArray(const T &messageContent) {
         const int messageSize{static_cast<int>(messageContent.ByteSizeLong())};
         const size_t bufferSize{sizeof(messageSize) + messageSize};
-        uint8_t *buffer{static_cast<uint8_t *>(std::malloc(bufferSize))};
-        if (!buffer) return nullptr;
+        ProtobufByteArray buffer = std::make_unique<uint8_t[]>(bufferSize);
 
-        std::memcpy(buffer, &messageSize, sizeof(messageSize));
-        if (!messageContent.SerializeToArray(buffer + sizeof(messageSize), messageSize)) {
-            free(buffer);
-            return nullptr;
+        std::memcpy(buffer.get(), &messageSize, sizeof(messageSize));
+        if (!messageContent.SerializeToArray(buffer.get() + sizeof(messageSize), messageSize)) {
+            return {};
         }
 
         return buffer;
@@ -97,7 +97,7 @@ namespace {
 }
 
 namespace Proto {
-    uint8_t *getOccurrencesForUsr(Index *index, const char *usr, uint64_t roles) {
+    ProtobufByteArray getOccurrencesForUsr(Index *index, StringRef usr, uint64_t roles) {
         GOOGLE_PROTOBUF_VERIFY_VERSION;
 
         ProtoIndexStoreDB::SymbolOccurrences occurrences;
@@ -114,7 +114,7 @@ namespace Proto {
         return convertToByteArray(occurrences);
     }
 
-    uint8_t *getCanonicalSymbolOccurrencesByName(Index *index, indexstoredb_llvm::StringRef name) {
+    ProtobufByteArray getCanonicalSymbolOccurrencesByName(Index *index, StringRef name) {
         GOOGLE_PROTOBUF_VERIFY_VERSION;
 
         ProtoIndexStoreDB::SymbolOccurrences occurrences;
@@ -131,7 +131,7 @@ namespace Proto {
         return convertToByteArray(occurrences);
     }
 
-    uint8_t *getSymbolsInFilePath(Index *index, indexstoredb_llvm::StringRef path) {
+    ProtobufByteArray getSymbolsInFilePath(Index *index, StringRef path) {
         GOOGLE_PROTOBUF_VERIFY_VERSION;
 
         ProtoIndexStoreDB::Symbols symbols;
@@ -147,7 +147,7 @@ namespace Proto {
         return convertToByteArray(symbols);
     }
 
-    uint8_t *getOccurrencesInFilePath(Index *index, indexstoredb_llvm::StringRef path, uint64_t roles) {
+    ProtobufByteArray getOccurrencesInFilePath(Index *index, StringRef path, uint64_t roles) {
         GOOGLE_PROTOBUF_VERIFY_VERSION;
 
         ProtoIndexStoreDB::SymbolOccurrences occurrences;
@@ -164,7 +164,7 @@ namespace Proto {
         return convertToByteArray(occurrences);
     }
 
-    uint8_t *getLightOccurrencesInFilePath(Index *index, indexstoredb_llvm::StringRef path, uint64_t roles) {
+    ProtobufByteArray getLightOccurrencesInFilePath(Index *index, StringRef path, uint64_t roles) {
         GOOGLE_PROTOBUF_VERIFY_VERSION;
 
         ProtoIndexStoreDB::LightOccurrences occurrences;

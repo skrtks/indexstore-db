@@ -58,6 +58,7 @@ typedef void *indexstoredb_error_t;
 typedef void *indexstoredb_symbol_location_t;
 typedef void *indexstoredb_symbol_relation_t;
 typedef void *indexstoredb_unit_info_t;
+typedef void *indexstoredb_byte_array_t;
 
 typedef enum {
   INDEXSTOREDB_SYMBOL_ROLE_DECLARATION = 1 << 0,
@@ -161,6 +162,9 @@ typedef bool(^indexstoredb_symbol_receiver_t)(_Nonnull indexstoredb_symbol_t);
 
 /// Returns true to continue.
 typedef bool(^indexstoredb_symbol_occurrence_receiver_t)(_Nonnull indexstoredb_symbol_occurrence_t);
+
+/// Normal function pointer for better compatibility with JNA
+typedef void (*indexstoredb_byte_array_receiver_t)(indexstoredb_byte_array_t);
 
 /// Returns true to continue.
 typedef bool(^indexstoredb_symbol_name_receiver)(const char *_Nonnull);
@@ -312,13 +316,14 @@ indexstoredb_index_symbol_occurrences_by_usr(
 
 /// Collects all symbol occurrences that match the provided \p usr and \p roles.
 ///
-/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
-/// handled by the caller.
-INDEXSTOREDB_PUBLIC uint8_t *_Nullable
+/// The occurrences are serialized and passed to the receiver in a byte array. The result is only valid for the
+/// duration of the call.
+INDEXSTOREDB_PUBLIC void
 indexstoredb_index_symbol_occurrences_by_usr_buffered(
         _Nonnull indexstoredb_index_t index,
         const char *_Nonnull usr,
-        uint64_t roles);
+        uint64_t roles,
+        _Nonnull indexstoredb_byte_array_receiver_t receiver);
 
 /// Iterates over each symbol occurrence related to the \p usr with \p roles.
 ///
@@ -342,12 +347,12 @@ indexstoredb_index_symbols_contained_in_file_path(_Nonnull indexstoredb_index_t 
 
 /// Iterates over all the symbols contained in \p path
 ///
-/// The symbols are serialized and returned in a byte array. Release of the memory allocated for this array should be
-/// handled by the caller.
-INDEXSTOREDB_PUBLIC
-uint8_t *_Nullable
+/// The occurrences are serialized and passed to the receiver in a byte array. The result is only valid for the
+/// duration of the call.
+INDEXSTOREDB_PUBLIC void
 indexstoredb_index_symbols_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
-                                                           const char *_Nonnull path);
+                                                           const char *_Nonnull path,
+                                                           _Nonnull indexstoredb_byte_array_receiver_t receiver);
 
 /// Iterates over all the occurrences contained in \p path
 ///
@@ -360,23 +365,23 @@ indexstoredb_index_occurrences_contained_in_file_path(_Nonnull indexstoredb_inde
 
 /// Iterates over all the occurrences contained in \p path
 ///
-/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
-/// handled by the caller.
-INDEXSTOREDB_PUBLIC
-uint8_t *_Nullable
+/// The occurrences are serialized and passed to the receiver in a byte array. The result is only valid for the
+/// duration of the call.
+INDEXSTOREDB_PUBLIC void
 indexstoredb_index_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
                                                                const char *_Nonnull path,
-                                                               uint64_t roles);
+                                                               uint64_t roles,
+                                                               _Nonnull indexstoredb_byte_array_receiver_t receiver);
 
 /// Iterates over all the occurrences contained in \p path. Collects only USR, line and column for the occurrence.
 ///
-/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
-/// handled by the caller.
-INDEXSTOREDB_PUBLIC
-uint8_t *_Nonnull
+/// The occurrences are serialized and passed to the receiver in a byte array. The result is only valid for the
+/// duration of the call.
+INDEXSTOREDB_PUBLIC void
 indexstoredb_index_light_occurrences_contained_in_file_path_buffered(_Nonnull indexstoredb_index_t index,
                                                                      const char *_Nonnull path,
-                                                                     uint64_t roles);
+                                                                     uint64_t roles,
+                                                                     _Nonnull indexstoredb_byte_array_receiver_t receiver);
 
 /// Returns the USR of the given symbol.
 ///
@@ -493,13 +498,13 @@ indexstoredb_index_canonical_symbol_occurences_by_name(
 /// The canonical symbol occurrence will be passed in to this function. It is valid only for the
 /// duration of the call. The function should return true to continue iterating.
 ///
-/// The occurrences are serialized and returned in a byte array. Release of the memory allocated for this array should be
-/// handled by the caller.
-INDEXSTOREDB_PUBLIC
-uint8_t* _Nullable
+/// The occurrences are serialized and passed to the receiver in a byte array. The result is only valid for the
+/// duration of the call.
+INDEXSTOREDB_PUBLIC void
 indexstoredb_index_canonical_symbol_occurrences_by_name_buffered(
-    indexstoredb_index_t _Nonnull index,
-    const char *_Nonnull symbolName
+    _Nonnull indexstoredb_index_t index,
+    const char *_Nonnull symbolName,
+    _Nonnull indexstoredb_byte_array_receiver_t receiver
 );
 
 /// Iterates over every canonical symbol that matches the pattern.
